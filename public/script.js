@@ -23,6 +23,26 @@ const config = {
     ]
 };
 
+// Debug Logger
+const debugDiv = document.getElementById('debugLog');
+function log(msg) {
+    console.log(msg);
+    if (debugDiv) {
+        debugDiv.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${msg}</div>`;
+        debugDiv.scrollTop = debugDiv.scrollHeight;
+    }
+}
+// Replace console.log with our log function for critical parts
+const originalLog = console.log;
+console.log = function (...args) {
+    originalLog.apply(console, args);
+    log(args.join(' '));
+};
+console.error = function (...args) {
+    originalLog.apply(console, args);
+    log('ERROR: ' + args.join(' '));
+};
+
 // DOM Elements
 const videoUrlInput = document.getElementById('videoUrl');
 const loadBtn = document.getElementById('loadBtn');
