@@ -1,4 +1,8 @@
-const socket = io();
+const socket = io({
+    transports: ['websocket', 'polling'], // Try WebSocket first, then polling
+    reconnection: true,
+    reconnectionAttempts: 10
+});
 const roomName = 'watch-together-room'; // Hardcoded for simplicity as per requirements
 let localStream;
 let peerConnection;
@@ -123,6 +127,17 @@ function extractVideoId(url) {
 }
 
 // Socket.io Signaling
+socket.on('connect_error', (err) => {
+    console.log('Connection Error:', err);
+    statusSpan.textContent = 'Status: Connection Error';
+});
+
+socket.on('disconnect', (reason) => {
+    console.log('Disconnected:', reason);
+    statusSpan.textContent = 'Status: Disconnected (' + reason + ')';
+    connectBtn.disabled = false;
+});
+
 socket.on('created', (room) => {
     console.log('Created room ' + room);
     isInitiator = true;

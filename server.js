@@ -47,8 +47,8 @@ io.on('connection', (socket) => {
         socket.to(roomName).emit('candidate', candidate);
     });
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
+    socket.on('disconnect', (reason) => {
+        console.log('User disconnected:', socket.id, 'Reason:', reason);
     });
 });
 
