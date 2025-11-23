@@ -7,24 +7,30 @@ const roomName = 'watch-together-room'; // Hardcoded for simplicity as per requi
 let localStream;
 let peerConnection;
 let dataChannel;
-peerConnection.onicecandidate = (event) => {
-    if (event.candidate) {
-        socket.emit('candidate', event.candidate, roomName);
-    }
-};
+let candidateQueue = [];
 
-peerConnection.onconnectionstatechange = () => {
-    if (peerConnection.connectionState === 'connected') {
-        statusSpan.textContent = 'Status: Connected (P2P)';
-    }
-};
+// WebRTC Logic
+function createPeerConnection() {
+    peerConnection = new RTCPeerConnection(config);
 
-if (!isInitiator) {
-    peerConnection.ondatachannel = (event) => {
-        dataChannel = event.channel;
-        setupDataChannel();
+    peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+            socket.emit('candidate', event.candidate, roomName);
+        }
     };
-}
+
+    peerConnection.onconnectionstatechange = () => {
+        if (peerConnection.connectionState === 'connected') {
+            statusSpan.textContent = 'Status: Connected (P2P)';
+        }
+    };
+
+    if (!isInitiator) {
+        peerConnection.ondatachannel = (event) => {
+            dataChannel = event.channel;
+            setupDataChannel();
+        };
+    }
 }
 
 function createDataChannel() {
