@@ -1,0 +1,189 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.video-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-right: 1px solid #444;
+    min-width: 0;
+    /* Prevent flex item from overflowing */
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Allow controls to wrap on small screens */
+}
+
+input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+}
+
+input:focus {
+    outline: 2px solid #007bff;
+}
+
+#videoUrl {
+    flex-grow: 1;
+    min-width: 200px;
+    /* Ensure input doesn't get too small */
+}
+
+button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    /* Prevent button text wrapping */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#player {
+    flex-grow: 1;
+    background-color: #000;
+    width: 100%;
+    /* Ensure player takes full width */
+}
+
+.chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+    min-width: 300px;
+    /* Minimum width for chat */
+}
+
+#chatBox {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message.local {
+    background-color: #007bff;
+    align-self: flex-end;
+}
+
+.message.remote {
+    background-color: #444;
+    align-self: flex-start;
+}
+
+.timestamp {
+    font-size: 0.7em;
+    opacity: 0.7;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.chat-input {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #444;
+}
+
+#msgInput {
+    flex-grow: 1;
+}
+
+#status {
+    font-size: 0.9em;
+    color: #aaa;
+    white-space: nowrap;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        align-items: flex-start;
+        /* Align to top on mobile */
+        padding: 10px 0;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 95%;
+        height: auto;
+        min-height: 90vh;
+    }
+
+    .video-section {
+        flex: none;
+        /* Disable flex grow/shrink */
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #444;
+        padding: 10px;
+    }
+
+    #player {
+        height: 300px;
+        /* Fixed height for video on mobile */
+    }
+
+    .chat-section {
+        flex: 1;
+        /* Chat takes remaining space */
+        min-width: 0;
+        height: 400px;
+        /* Fixed height for chat on mobile */
+    }
+
+    .controls {
+        gap: 5px;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+}

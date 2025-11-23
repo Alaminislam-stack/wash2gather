@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Together</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="video-section">
+            <div class="controls">
+                <input type="text" id="videoUrl" placeholder="Paste YouTube URL here">
+                <button id="loadBtn">Load Video</button>
+                <button id="connectBtn">Connect</button>
+                <span id="status">Status: Disconnected</span>
+            </div>
+            <div id="player"></div>
+        </div>
+        <div class="chat-section">
+            <div id="chatBox"></div>
+            <div class="chat-input">
+                <input type="text" id="msgInput" placeholder="Type a message...">
+                <button id="sendBtn">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
